@@ -1,4 +1,4 @@
-# timer.py
+##timer.py
 
 import datetime
 import time
@@ -53,3 +53,39 @@ def process_input(input_text):
             elif token.text.lower() in ["hour", "hours"]:
                 duration *= 3600
     return duration
+
+def main(query=None):  # Modify main to accept an optional argument
+    # Check if a query is provided
+    if query:
+        duration = process_input(query)
+        if duration:
+            # Set a timer based on the provided query
+            timer = Timer(duration)
+            timer.start()
+
+            # Check the timer every second
+            while timer.is_running:
+                time.sleep(1)
+            print("Timer stopped.")
+        else:
+            print("No duration specified.")
+    else:
+        # Prompt the user to input the duration in natural language
+
+        duration_text = input()
+        duration = process_input(duration_text)
+        if duration:
+            # Set a timer based on the user input
+            timer = Timer(duration)
+            timer.start()
+
+            # Check the timer every second
+            while timer.is_running:
+                time.sleep(1)
+            print("Timer stopped.")
+        else:
+            print("No duration specified.")
+
+# Example usage:
+if __name__ == "__main__":
+    main()

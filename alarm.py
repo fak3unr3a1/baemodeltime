@@ -1,4 +1,5 @@
-# alarm.py
+##alarm.py
+
 
 import datetime
 import time
@@ -53,3 +54,21 @@ def process_input(input_text):
     current_date = datetime.datetime.now().date()
     alarm_time = datetime.datetime.combine(current_date, alarm_time.time())
     return alarm_time
+
+def main(query=None):  # Modify main to accept an optional argument
+    ##Set an alarm
+    print("Setting an alarm. Please enter time (e.g., 'Set an alarm for 10:30 AM'):")
+    input_text = query if query else input()
+    alarm_time = process_input(input_text)
+    if alarm_time is not None:
+        alarm = Alarm(alarm_time)
+        alarm.set_alarm()
+
+    # Check alarms and timers every second
+    while True:
+        alarm.check_alarm()
+        time.sleep(1)
+
+# Example usage:
+if __name__ == "__main__":
+    main()
